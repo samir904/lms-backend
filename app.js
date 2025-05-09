@@ -8,13 +8,17 @@ import paymentRoute from "./routes/payment.routes.js"
 import {config} from 'dotenv';
 import morgan from "morgan";
 import errorMiddleware from "./middlewares/error.middleware.js";
+import path from "path"
 config();
 
  const app = express();
+
  
 
  app.use(express.json());
  app.use(express.urlencoded({extended:true}))
+
+ const _dirname=path.resolve();
 
  app.use(
    cors({
@@ -42,5 +46,6 @@ config();
 
  app.use(errorMiddleware);
  
+ app.use(express.static(path.join(_dirname,"/lms-fronted/dist")))
 
  export default app;
