@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "v22.11.0"
+  },
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
