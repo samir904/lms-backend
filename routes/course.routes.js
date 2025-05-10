@@ -22,7 +22,7 @@ router
   .get(getAllcourse)
   .post(
     isLoggedIn,
-    authorizedRoles("ADMIN",),
+    authorizedRoles("ADMIN"),
     upload.single("thumbnail"),
     createCourse
   )
@@ -30,7 +30,7 @@ router
 
 router
   .route("/:id")
-  .get(isLoggedIn,authorizedSubscriber, getLecturesByCourseId)
+  .get(authorizedSubscriber, getLecturesByCourseId)
   .put(isLoggedIn, authorizedRoles("ADMIN"), updateCourse)
   .post(
     isLoggedIn,

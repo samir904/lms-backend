@@ -32,11 +32,6 @@ router.route("/unsubscribe")
 )
 
 router
-    .route("/")
-    .get(
-        isLoggedIn,
-        authorizedRoles,
-        allPayments
-    )
-
+  .route("/")
+  .get(isLoggedIn, authorizedRoles("ADMIN"), allPayments); // Added "ADMIN"
 export default router;
