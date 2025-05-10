@@ -8,9 +8,10 @@ import crypto from "crypto";
 const cookieOptions = {
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // False for local dev
-  sameSite: "Lax",
-  path: "/",
+  secure: true, // Always true for HTTPS
+  sameSite: 'Lax',
+  path: '/',
+  domain: 'lms-backend-wxel.onrender.com', // Explicitly set domain
 };
 
 const register = async (req, res, next) => {
