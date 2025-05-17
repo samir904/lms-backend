@@ -1,7 +1,8 @@
 import AppError from "../utils/error.util.js";
 import jwt from "jsonwebtoken"
 const isLoggedIn=async (req,res,next)=>{
-    const{token}=req.cookie;//since we have used cookie pareser so we get the token 
+    //console.log("cookie recieved",req.cookies)
+    const{token}=req.cookies;//since we have used cookie pareser so we get the token 
 
     if(!token){
         return next(new AppError('unauthenticated,please login again',401))
