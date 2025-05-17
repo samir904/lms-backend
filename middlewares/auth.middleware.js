@@ -1,22 +1,16 @@
 import AppError from "../utils/error.util.js";
 import jwt from "jsonwebtoken"
-const isLoggedIn = async (req, res, next) => {
-    console.log('Cookies:', req.cookies);
-    const { token } = req.cookies;
-    if (!token) {
-      console.log('No token found in cookies');
-      return next(new AppError('unauthenticated, please login again', 401));
+const isLoggedIn=async (req,res,next)=>{
+    const{token}=req.cookie;//since we have used cookie pareser so we get the token 
+
+    if(!token){
+        return next(new AppError('unauthenticated,please login again',401))
     }
-    try {
-      const userDetails = jwt.verify(token, process.env.JWT_SECRET);
-      console.log('Decoded Token:', userDetails);
-      req.user = userDetails;
-      next();
-    } catch (error) {
-      console.error('Token verification error:', error);
-      return next(new AppError('unauthenticated, please login again', 401));
-    }
-  };
+    const userDetails=await jwt.verify(token,process.env.JWT_SECRET);
+
+    req.user=userDetails;
+    next();
+}
 
 const authorizedRoles=(...roles)=>async(req,res,next)=>{
     const currentUserRoles=req.user.role;
